@@ -1,0 +1,54 @@
+git Tut
+
+git init --- create a repository
+
+modify - stage - commit
+*
+git status -- shows modified files but not commited
+
+git add *file name -- adds file to staging area
+
+git rm --cached *filename 
+
+git add . --- add all files to staging area
+
+git commit -m "descriptive msg"
+
+git log --- see git history
+git log --oneline  ---see git history
+
+git checkout *commit id
+git checkout master
+git 
+git revert *commit id 
+shift + : wq
+ 
+git reset *commit id
+git reset *commit id --hard
+
+git branch -a  ---check the existing branches 
+git branch *name of branch -- create a branch
+git checkout -b *branch name -- create a branch
+
+git checkout *branch_name  --- switch to branch
+git checkout master
+git branch -D *branc_name  --- delete an unmerged branch
+
+git merge feature-a   --- you have to be on the master branch to use this command,
+ this would add the branch to the branch
+
+git merge *branch_name
+*in case of conflict, save file
+*git add . ,git commit ,Shift + : wq
+
+Git Hub
+
+git push https://studybudyterm%2
+git remote add origin https://studybudyterm%2
+git clone https://studybudyterm%2
+
+git remote -v  
+git push origin master
+
+git pull origin master
+git push origin *branch name
