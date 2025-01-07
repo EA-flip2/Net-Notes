@@ -1,0 +1,79 @@
+CREATE USER 'emma'@'localhost' IDENTIFIED BY 'xyz';
+GRANT ALL PRIVILEGES ON bank.* TO 'emma'@'localhost';
+FLUSH PRIVILEGES;
+
+
+If the user emma already exists, use ALTER USER instead of CREATE USER to update the password:
+ALTER USER 'emma'@'localhost' IDENTIFIED BY 'xyz';
+
+
+Create database myDB;
+use myDB;
+drop database myDB;
+
+Alter database myDB read only = 1; # or 0
+
+Create table employees(
+	employee_id INT,
+	first_name VARCHAR(50),
+	last_name  VARCHAR(50),
+	hourly_pay DECIMAL(5,2),
+	hire_date  DATE
+);
+
+Select * From employess; # the table
+rename Table employees to workers; # rename column
+
+alter table employees ADD phone_number VARCHAR(15)
+
+alter table employees
+modify column email varchar(100)
+
+alter table employees
+modify email varchar(100)
+after last_name;#first
+
+alter table employees
+drop column email;
+
+
+#insert rows
+insert into employees
+values(
+	1,'Eugene','Krabs',25.50,'2025-01-02'
+);
+
+#insert multiple rows
+insert into employees
+values( 1,'Eugene','Krabs',25.50,'2025-01-02'),
+	(2,'Squidward','Squarepants',12.5,"2023-01-05");
+
+#inserting from a table
+LOAD DATA LOCAL INFILE '/path/pet.txt' INTO TABLE pet;
+Whistler        Gwen    bird    \N      1997-12-09      \N  #example of file content,
+
+#missing values
+insert into employees(empolyee_id, first_name, last_name)
+values( 6,'Sandy','Cheeks'),
+values( 6,'fish','legs');
+
+
+
+#selecting rows
+Select last_name,first_name from employees;
+Select * from employees where employee_id = 1;
+# where hourly_pay >= 12; hire_date <= '2023 -01-03'; 
+# where x != 1;where y is null; is not null
+ 
+
+SET SQL_SAFE_UPDATES = 0;
+update employees
+set hourly_pay = 13, 
+    hire_date = NULL,
+where employee_id = 4;
+
+SET SQL_SAFE_UPDATES = 1;
+
+
+delete from employees
+where employee_id = 6;
