@@ -6,25 +6,31 @@ FLUSH PRIVILEGES;
 If the user emma already exists, use ALTER USER instead of CREATE USER to update the password:
 ALTER USER 'emma'@'localhost' IDENTIFIED BY 'xyz';
 
+# creating a DataBase
 
 Create database myDB;
-use myDB;
-drop database myDB;
+use myDB; # makes database active
+drop database myDB; # remove/delete database
 
 Alter database myDB read only = 1; # or 0
 
+#creating a table
+
 Create table employees(
-	employee_id INT,
-	first_name VARCHAR(50),
+	employee_id INT UNUQUE,  the int means integer values , Unique means each record must have a unique employee id
+	first_name VARCHAR(50), means 50 characters max
 	last_name  VARCHAR(50),
-	hourly_pay DECIMAL(5,2),
-	hire_date  DATE
+	hourly_pay DECIMAL(5,2), 5 figures, 2 decimal places 
+	hire_date  DATE NOT NULL     makes sure value is always filled
 );
 
-Select * From employess; # the table
+Select * From employees; # the table
 rename Table employees to workers; # rename column
 
 alter table employees ADD phone_number VARCHAR(15)
+
+ALTER table employees ADD CONSTRAINT UNIQUE(employee_id);
+ALTER table employees MODIFY hire_date DATE NOT NULL
 
 alter table employees
 modify column email varchar(100)
@@ -35,6 +41,43 @@ after last_name;#first
 
 alter table employees
 drop column email;
+
+DROP TABLE employess; # Deletes the table
+
+# check constrain
+
+create Table employees(
+	employee_id INT,
+	first_name VARCHAR(50)
+	last_name  VARCHAR(50)
+	hourly_pay DECIMAL(5,2)
+	CONSTRAINT chk_hourly_pay CHECK (hourly_pay > 10.00) # or CHECK (hourly_pay > 10.00), however its best to use first method since yo can 
+								reach constrain by its name (chk_hourly_pay)
+);
+
+Alter table employees
+ADD CONSTRAINT chk_hourly_pay CHECK (hourly_pay > 10.00)
+
+Alter table employees
+Drop CHECK chk_hourly_pay; # remove check constrain
+
+# Default
+Create Table products(
+	product_id INT,
+	product_name VARCHAR(25),
+	price DECIMAL(4,2) DEFAULT 0);
+
+Alter table products
+Modify price SET DEFAULT 0;
+
+Create Table transactions(
+	trans_id INT;
+	amount DECIMAL(5,2);
+	date_of 	DATETIME DEFAULT NOW(); # automatically adds date and time
+)
+
+
+
 
 
 #insert rows
@@ -64,7 +107,9 @@ Select last_name,first_name from employees;
 Select * from employees where employee_id = 1;
 # where hourly_pay >= 12; hire_date <= '2023 -01-03'; 
 # where x != 1;where y is null; is not null
- 
+
+
+# updating/delecting records
 
 SET SQL_SAFE_UPDATES = 0;
 update employees
@@ -72,8 +117,21 @@ set hourly_pay = 13,
     hire_date = NULL,
 where employee_id = 4;
 
-SET SQL_SAFE_UPDATES = 1;
+SET SQL_SAFE_UPDATES = 1; 
 
 
 delete from employees
 where employee_id = 6;
+
+# safety checks
+SET AUTOCOMMIT = OFF; prevents finalizing every command, allowing undo to work
+COMMIT; create manual safe point
+ROLLBACK; revert to safe point
+SET SQL_SAFE_UPDATES = 1; puts constrains on dramatically altering data , especially without WHERE key word
+
+
+ #data and time
+insert into testable
+values(CURRENT_DATE(), CURRETNT_TIME(), NOW()); # for datatypes DATE,TIME & DATETIME respectively
+
+
