@@ -51,8 +51,8 @@ create Table employees(
 	first_name VARCHAR(50)
 	last_name  VARCHAR(50)
 	hourly_pay DECIMAL(5,2)
-	CONSTRAINT chk_hourly_pay CHECK (hourly_pay > 10.00) # or CHECK (hourly_pay > 10.00), however its best to use first method since yo can 
-								reach constrain by its name (chk_hourly_pay)
+	CONSTRAINT chk_hourly_pay CHECK (hourly_pay > 10.00) # or CHECK (hourly_pay > 10.00), however its best to use first method since you can 
+reach constrain by its name (chk_hourly_pay)
 );
 
 Alter table employees
